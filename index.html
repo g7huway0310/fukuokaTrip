@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 福岡深度漫遊手冊</title>
+    <!-- 引入 Tailwind CSS (快速排版) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 列印樣式 (保留您原本的設計) */
+        @media print {
+            body * { visibility: hidden; }
+            #printable-content, #printable-content * { visibility: visible; }
+            #printable-content { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; background: white; }
+            .no-print { display: none !important; }
+            .print-break { break-before: page; }
+            #printable-content { box-shadow: none !important; }
+        }
+        
+        /* 隱藏原生捲軸但保留捲動功能 (給 Tab 選單用) */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* 內容區預設隱藏，由 JS 控制顯示 */
+        .tab-content { display: none; }
+        #itinerary { display: block; } /* 預設顯示行程頁 */
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 p-2 md:p-6 font-sans text-slate-800 antialiased">
+
+    <!-- 控制列 -->
+    <div class="max-w-5xl mx-auto mb-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200 no-print">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    ⛩️ 2026 福岡深度漫遊 (全方位終極版)
+                </h2>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded font-bold border border-blue-200">2026.09.24 - 09.29</span>
+                    <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs rounded font-bold border border-amber-200">雨天應變機制</span>
+                    <span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-xs rounded font-bold border border-rose-200">在地小眾秘境</span>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button id="copy-btn" onclick="handleCopy()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-medium transition flex items-center gap-2">
+                    📋 複製網址
+                </button>
+                <button onclick="window.print()" class="px-5 py-2 bg-indigo-700 hover:bg-indigo-800 text-white rounded-lg text-sm font-bold shadow transition flex items-center gap-2">
+                    🖨️ 列印手冊
+                </button>
+            </div>
+        </div>
+        
+        <!-- Navigation Tabs (水平捲動) -->
+        <div class="flex mt-6 border-b border-slate-200 overflow-x-auto hide-scrollbar pb-1 gap-1" id="tab-container">
+            <!-- 每個按鈕身上都綁定了獨自的預設樣式與啟動樣式，供 JS 切換 -->
+            <button onclick="switchTab('itinerary', this)" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-blue-700 border-blue-600 bg-blue-50" data-default="text-slate-500 hover:text-blue-600 border-transparent" data-active="text-blue-700 border-blue-600 bg-blue-50">🗓️ 每日黃金行程</button>
+            
+            <button onclick="switchTab('season', this)" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-orange-600 border-transparent" data-default="text-slate-500 hover:text-orange-600 border-transparent" data-active="text-orange-700 border-orange-600 bg-orange-50">🍁 季節與小眾秘境</button>
+            
+            <button onclick="switchTab('rain', this)" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-sky-600 border-transparent" data-default="text-slate-500 hover:text-sky-600 border-transparent" data-active="text-sky-700 border-sky-600 bg-sky-50">☔ 雨天備案(一日遊應變)</button>
+            
+            <button onclick="switchTab('sake', this)" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-purple-600 border-transparent" data-default="text-slate-500 hover:text-purple-600 border-transparent" data-active="text-purple-700 border-purple-600 bg-purple-50">🍶 九州銘酒專區</button>
+            
+            <button onclick="switchTab('food', this)" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-rose-600 border-transparent" data-default="text-slate-500 hover:text-rose-600 border-transparent" data-active="text-rose-700 border-rose-600 bg-rose-50">🍽️ 美食預約戰略</button>
+            
+            <button onclick="switchTab('budget', this)" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-amber-600 border-transparent" data-default="text-slate-500 hover:text-amber-600 border-transparent" data-active="text-amber-700 border-amber-600 bg-amber-50">💰 預估花費</button>
+            
+            <button onclick="switchTab('hotel', this)" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-indigo-600 border-transparent" data-default="text-slate-500 hover:text-indigo-600 border-transparent" data-active="text-indigo-700 border-indigo-600 bg-indigo-50">🏨 和博多住宿</button>
+        </div>
+    </div>
+
+    <!-- 主要內容區 -->
+    <div id="printable-content" class="max-w-5xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden min-h-[800px]">
+        
+        <!-- Tab 1: Itinerary (行程) -->
+        <div id="itinerary" class="tab-content">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-800 text-white p-8">
+                <h1 class="text-2xl md:text-3xl font-extrabold mb-2">福岡 6 天 5 夜 (週末閃避 x 小眾秘境版)</h1>
+                <p class="text-slate-100 text-sm">2026.09.24(四) - 09.29(二) · 華航 CI 128 / CI 117 · 和博多飯店連住</p>
+            </div>
+            <div class="p-8 space-y-8 bg-white">
+                
+                <!-- Day 1 -->
+                <div class="flex gap-4 print:break-inside-avoid relative">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center shadow-md text-white shrink-0 z-10 bg-indigo-600 text-sm">✈️</div>
+                        <div class="absolute top-8 bottom-0 w-0.5 bg-slate-200 left-4 -ml-[1px] print:hidden"></div>
+                    </div>
+                    <div class="flex-1 pb-8">
+                        <h2 class="text-base font-bold text-slate-900 flex items-baseline gap-2">Day 1 <span class="text-xs font-normal text-slate-500">09/24 (四)</span></h2>
+                        <h3 class="text-lg font-bold mb-5 text-indigo-800">初見福岡：落地與牛腸鍋</h3>
+                        <div class="space-y-6">
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">14:40</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">搭乘華航 CI 128 飛往福岡</h4>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border mt-1 bg-indigo-100 text-indigo-800 border-indigo-200"><span class="mr-1">✈️</span> plane</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">18:05</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">抵達福岡機場 (FUK)</h4>
+                                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">通關極快，搭地鐵 2 站即達博多。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">19:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">入住 HOTEL WA HAKATA</h4>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border mt-1 bg-blue-100 text-blue-800 border-blue-200"><span class="mr-1">🚄</span> 福岡市地下鐵</span>
+                                </div>
+                            </div>
+                            <div class="border p-3 rounded-lg my-2 ml-14 bg-indigo-50 border-indigo-200 text-indigo-900">
+                                <div class="flex items-center gap-2 font-bold text-sm mb-1"><span>🍲</span> 20:30 晚餐：博多牛腸鍋 (Motsunabe)</div>
+                                <div class="text-xs opacity-90">第一晚先震撼味蕾。推薦去博多車站吃「おおやま(Oyama)」或是「笑樂」。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="flex gap-4 print:break-inside-avoid relative">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center shadow-md text-white shrink-0 z-10 bg-emerald-600 text-sm">🚌</div>
+                        <div class="absolute top-8 bottom-0 w-0.5 bg-slate-200 left-4 -ml-[1px] print:hidden"></div>
+                    </div>
+                    <div class="flex-1 pb-8">
+                        <h2 class="text-base font-bold text-slate-900 flex items-baseline gap-2">Day 2 <span class="text-xs font-normal text-slate-500">09/25 (五)</span></h2>
+                        <h3 class="text-lg font-bold mb-5 text-emerald-800">一日遊 I：平日的由布院最悠閒</h3>
+                        <div class="space-y-6">
+                            <div class="border-l-4 p-2 text-xs rounded-r mb-2 border-blue-400 bg-blue-50 text-blue-800">
+                                💡 戰略：平日去由布院，金鱗湖與湯之坪街道的旅遊品質最佳！(若遇大雨請見「雨天備案」Tab)
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">08:00</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">博多車站 集合上車</h4>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border mt-1 bg-emerald-100 text-emerald-800 border-emerald-200"><span class="mr-1">🚌</span> KLook 專車</span>
+                                </div>
+                            </div>
+                            <div class="border p-3 rounded-lg my-2 ml-14 bg-rose-50 border-rose-200 text-rose-900">
+                                <div class="flex items-center gap-2 font-bold text-sm mb-1"><span>🌸</span> 09:00 太宰府天滿宮</div>
+                                <div class="text-xs opacity-90">買剛烤好的<strong>「梅枝餅」</strong>！看隈研吾設計的星巴克。</div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">11:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">由布院・湯之坪街道 (午餐+自由活動)</h4>
+                                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">吃 B-speak 蛋糕捲、漫步至金鱗湖。平日來不用跟人擠來擠去。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">15:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">別府 灶地獄</h4>
+                                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">看奇特的溫泉、泡足湯。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">18:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">返抵博多車站</h4>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">19:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">晚餐：博多拉麵</h4>
+                                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">推薦博多車站的「ShinShin」豚骨拉麵。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="flex gap-4 print:break-inside-avoid relative">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center shadow-md text-white shrink-0 z-10 bg-rose-600 text-sm">🛍️</div>
+                        <div class="absolute top-8 bottom-0 w-0.5 bg-slate-200 left-4 -ml-[1px] print:hidden"></div>
+                    </div>
+                    <div class="flex-1 pb-8">
+                        <h2 class="text-base font-bold text-slate-900 flex items-baseline gap-2">Day 3 <span class="text-xs font-normal text-slate-500">09/26 (六)</span></h2>
+                        <h3 class="text-lg font-bold mb-5 text-rose-800">週末市區：小眾秘境與天神爆買</h3>
+                        <div class="space-y-6">
+                            <div class="border-l-4 p-2 text-xs rounded-r mb-2 border-red-400 bg-red-50 text-red-800">
+                                💡 戰略：今天是週六，留在市區逛秘境與商圈，空間最舒適。
+                            </div>
+                            <div class="border p-3 rounded-lg my-2 ml-14 bg-orange-50 border-orange-200 text-orange-900">
+                                <div class="flex items-center gap-2 font-bold text-sm mb-1"><span>👹</span> 09:30 小眾秘境：東長寺 (大佛與地獄巡禮)</div>
+                                <div class="text-xs opacity-90">在地人極度推薦。參觀全日本最大的木雕坐姿大佛，並體驗大佛底下的「地獄與極樂巡禮」(全黑通道)，極具特色！</div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">11:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">天神商圈 爆買啟動</h4>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border mt-1 bg-blue-100 text-blue-800 border-blue-200"><span class="mr-1">🚄</span> train</span>
+                                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">天神地下街、Parco、Bic Camera。</p>
+                                </div>
+                            </div>
+                            <div class="border p-3 rounded-lg my-2 ml-14 bg-amber-50 border-amber-200 text-amber-900">
+                                <div class="flex items-center gap-2 font-bold text-sm mb-1"><span>🥖</span> 15:00 下午茶任務：明太子法棍</div>
+                                <div class="text-xs opacity-90">前往「Full Full 天神店」或是天神地下街，買熱騰騰的明太子法棍！</div>
+                            </div>
+                            <div class="border p-3 rounded-lg my-2 ml-14 bg-rose-50 border-rose-200 text-rose-900">
+                                <div class="flex items-center gap-2 font-bold text-sm mb-1"><span>🍲</span> 18:30 晚餐：水炊鍋 (需提前數週預約!)</div>
+                                <div class="text-xs opacity-90">享用預約好的「博多華味鳥」或「新三浦」。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="print:break-before-page"></div>
+
+                <!-- Day 4 -->
+                <div class="flex gap-4 print:break-inside-avoid relative">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center shadow-md text-white shrink-0 z-10 bg-sky-500 text-sm">🌊</div>
+                        <div class="absolute top-8 bottom-0 w-0.5 bg-slate-200 left-4 -ml-[1px] print:hidden"></div>
+                    </div>
+                    <div class="flex-1 pb-8">
+                        <h2 class="text-base font-bold text-slate-900 flex items-baseline gap-2">Day 4 <span class="text-xs font-normal text-slate-500">09/27 (日)</span></h2>
+                        <h3 class="text-lg font-bold mb-5 text-sky-800">週末近郊：季節限定能古島 或 海風糸島</h3>
+                        <div class="space-y-6">
+                            <div class="border-l-4 p-2 text-xs rounded-r mb-2 border-blue-400 bg-blue-50 text-blue-800">
+                                💡 戰略：今天是週日，交通班次多。提供兩個海景方案選擇。
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <div class="border border-orange-300 bg-orange-50 p-4 rounded-xl">
+                                    <h4 class="font-bold text-orange-800 flex items-center gap-2 mb-2">🌸 方案 A：能古島 (季節限定波斯菊)</h4>
+                                    <div class="text-xs space-y-2 text-slate-700">
+                                        <p>• <strong>深度特色：</strong> 9月底是初秋，能古島海島公園有滿山遍野的波斯菊，背景是湛藍大海，絕美！</p>
+                                        <p>• <strong>行程：</strong> 搭乘公車到「姪濱旅客待合所」轉乘渡輪 (約10分鐘) 即可登島。</p>
+                                    </div>
+                                </div>
+                                <div class="border border-sky-300 bg-sky-50 p-4 rounded-xl">
+                                    <h4 class="font-bold text-sky-800 flex items-center gap-2 mb-2">🏖️ 方案 B：糸島 (經典海景咖啡)</h4>
+                                    <div class="text-xs space-y-2 text-slate-700">
+                                        <p>• <strong>深度特色：</strong> 週末昭和公車加開班次，前往二見浦夫婦岩與白色鳥居非常方便。</p>
+                                        <p>• <strong>行程：</strong> 搭乘 JR 到九大學研都市站轉公車。在 SURF SIDE CAFE 吃午餐。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">16:00</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">返回市區 ➔ 買清酒！</h4>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border mt-1 bg-blue-100 text-blue-800 border-blue-200"><span class="mr-1">🚄</span> train</span>
+                                </div>
+                            </div>
+                            <div class="border p-3 rounded-lg my-2 ml-14 bg-purple-50 border-purple-200 text-purple-900">
+                                <div class="flex items-center gap-2 font-bold text-sm mb-1"><span>🍶</span> 17:00 買酒任務：住吉酒販 (博多車站內)</div>
+                                <div class="text-xs opacity-90">去買「田中六五」或灌籃高手「三井之壽」，晚上回飯店喝。(詳見清酒Tab)</div>
+                            </div>
+                            <div class="border p-3 rounded-lg my-2 ml-14 bg-slate-100 border-slate-300 text-slate-900">
+                                <div class="flex items-center gap-2 font-bold text-sm mb-1"><span>🦑</span> 19:00 晚餐：呼子活花枝 (需提前預約!)</div>
+                                <div class="text-xs opacity-90">預約「河太郎」，品嚐極致新鮮的現切透明活花枝。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="flex gap-4 print:break-inside-avoid relative">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center shadow-md text-white shrink-0 z-10 bg-orange-600 text-sm">🌋</div>
+                        <div class="absolute top-8 bottom-0 w-0.5 bg-slate-200 left-4 -ml-[1px] print:hidden"></div>
+                    </div>
+                    <div class="flex-1 pb-8">
+                        <h2 class="text-base font-bold text-slate-900 flex items-baseline gap-2">Day 5 <span class="text-xs font-normal text-slate-500">09/28 (一)</span></h2>
+                        <h3 class="text-lg font-bold mb-5 text-orange-800">一日遊 II：平日壯闊阿蘇火山</h3>
+                        <div class="space-y-6">
+                            <div class="border-l-4 p-2 text-xs rounded-r mb-2 border-blue-400 bg-blue-50 text-blue-800">
+                                💡 戰略：週一去阿蘇，避開人潮。(若遇大雨請見「雨天備案」Tab)
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">08:00</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">博多車站 集合上車</h4>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border mt-1 bg-emerald-100 text-emerald-800 border-emerald-200"><span class="mr-1">🚌</span> KLook 專車</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">10:00</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">熊本城</h4>
+                                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">日本三大名城之一。</p>
+                                </div>
+                            </div>
+                            <div class="border p-3 rounded-lg my-2 ml-14 bg-orange-50 border-orange-200 text-orange-900">
+                                <div class="flex items-center gap-2 font-bold text-sm mb-1"><span>🐎</span> 13:30 草千里之濱 & 阿蘇中岳火山口</div>
+                                <div class="text-xs opacity-90">看著廣闊草原上的馬群，接著近距離觀看冒著白煙的火山口（視氣體開放狀況）。</div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">18:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">返回博多車站</h4>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">19:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">博多車站 頂級慶功宴</h4>
+                                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">最後一晚，推薦去吃高級和牛燒肉 (如：敘敘苑) 犒賞自己！</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 6 -->
+                <div class="flex gap-4 print:break-inside-avoid relative">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center shadow-md text-white shrink-0 z-10 bg-slate-500 text-sm">🛍️</div>
+                        <div class="absolute top-8 bottom-0 w-0.5 bg-slate-200 left-4 -ml-[1px] print:hidden"></div>
+                    </div>
+                    <div class="flex-1 pb-8">
+                        <h2 class="text-base font-bold text-slate-900 flex items-baseline gap-2">Day 6 <span class="text-xs font-normal text-slate-500">09/29 (二)</span></h2>
+                        <h3 class="text-lg font-bold mb-5 text-slate-700">最終補給：鋼彈朝聖與滿載而歸</h3>
+                        <div class="space-y-6">
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">09:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">飯店 Check-out，寄放行李</h4>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">10:00</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">前往 LaLaport 福岡</h4>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border mt-1 bg-emerald-100 text-emerald-800 border-emerald-200"><span class="mr-1">🚌</span> bus</span>
+                                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">博多車站搭公車直達。</p>
+                                </div>
+                            </div>
+                            <div class="border p-3 rounded-lg my-2 ml-14 bg-slate-100 border-slate-300 text-slate-900">
+                                <div class="flex items-center gap-2 font-bold text-sm mb-1"><span>🤖</span> 11:00 1:1 等比例 ν鋼彈</div>
+                                <div class="text-xs opacity-90">最後的大型超商與阿卡將採買。</div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">15:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">返回飯店領取行李</h4>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">16:30</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">抵達福岡機場 (FUK)</h4>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border mt-1 bg-blue-100 text-blue-800 border-blue-200"><span class="mr-1">🚄</span> 地下鐵</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 items-start relative">
+                                <div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">19:10</div>
+                                <div class="flex-1 pb-4">
+                                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">搭乘華航 CI 117 返回台灣</h4>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border mt-1 bg-indigo-100 text-indigo-800 border-indigo-200"><span class="mr-1">✈️</span> plane</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Season (季節) -->
+        <div id="season" class="tab-content p-8 space-y-8 bg-orange-50/30">
+            <div class="bg-gradient-to-r from-orange-600 to-amber-500 text-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-extrabold mb-2 flex items-center gap-2">🍁 季節限定與在地小眾秘境</h2>
+                <p class="text-orange-100 text-sm">旅遊不僅是踩點，更是體驗當地人的生活節奏與季節流轉。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 relative">
+                    <div class="absolute top-0 right-0 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">9月底初秋限定</div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">🌸 能古島海島公園 (Nokonoshima)</h3>
+                    <p class="text-sm text-slate-600 mb-3">9月底到10月初，剛好是「早開波斯菊 (Cosmos)」的季節。這裡是一座距離福岡市區只要10分鐘船程的小島。</p>
+                    <div class="bg-orange-50 p-3 rounded text-xs text-slate-700 space-y-1">
+                        <strong>深度視角：</strong> 觀光客大多去太宰府或由布院，但福岡在地人週末最愛帶家人來能古島。看著滿山遍野的粉色波斯菊，背景是湛藍的博多灣，是非常「日劇感」的絕景。已將其安排在 Day 4 選項中。
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 relative">
+                    <div class="absolute top-0 right-0 bg-slate-800 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">文化衝擊秘境</div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">👹 東長寺：大佛與地獄巡禮</h3>
+                    <p class="text-sm text-slate-600 mb-3">位於祇園站旁（離飯店很近）。裡面有一尊高達10.8公尺的全日本最大木雕坐姿大佛。</p>
+                    <div class="bg-slate-100 p-3 rounded text-xs text-slate-700 space-y-1">
+                        <strong>深度視角：</strong> 最特別的是大佛座台底下的「地獄與極樂巡禮」。您會進入一個伸手不見五指的純黑通道，必須扶著牆壁摸黑前進，據說在黑暗中摸到「佛之環」就能通往極樂世界。極度刺激且特別的小眾體驗！已安排在 Day 3 早晨。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Rain (雨天備案) -->
+        <div id="rain" class="tab-content p-8 space-y-8 bg-sky-50/30">
+            <div class="bg-gradient-to-r from-sky-600 to-blue-500 text-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-extrabold mb-2 flex items-center gap-2">☔ 雨天應變機制：一日遊煞車系統</h2>
+                <p class="text-sky-100 text-sm">9月底是日本颱風季的尾巴。如果天氣惡劣，硬走戶外行程只會受苦。我們有最強的「室內B計畫」。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-rose-500 mb-6">
+                <h3 class="text-lg font-bold text-slate-800 mb-2">⚠️ Klook 取消與應變策略</h3>
+                <ul class="text-sm space-y-2 text-slate-700">
+                    <li><strong>毛毛雨：</strong> 一日遊通常照常出發。阿蘇火山若因視線不良無法看到火山口，會改去火山博物館。</li>
+                    <li><strong>豪雨/颱風預報：</strong> 請在出發前 <strong class="text-red-500">24-48小時</strong> 關注天氣預報。若確定天氣極差，請果斷在 Klook App 申請「免費取消」(注意各行程的免費取消期限)。</li>
+                    <li><strong>交通停駛：</strong> 若 JR 或高速公路因颱風停駛，留在福岡市內走地下通道是最安全的！</li>
+                </ul>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-4 px-2">🏢 如果取消了一日遊，我們去哪？(室內黃金備案)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-5 rounded-xl border border-sky-200 shadow-sm">
+                    <h4 class="font-bold text-sky-800 flex items-center gap-2 mb-2">✨ teamLab Forest 福岡</h4>
+                    <p class="text-xs text-slate-600">位於 PayPay Dome 旁。全室內的光影藝術互動展，不管外面颳風下雨，裡面都能拍出夢幻美照。</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-sky-200 shadow-sm">
+                    <h4 class="font-bold text-sky-800 flex items-center gap-2">🐋 海之中道 海洋世界 (水族館)</h4>
+                    <p class="text-xs text-slate-600">絕大多數區域都在室內。可以看震撼的海豚表演，以及超巨大的全景水槽，非常療癒。</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-sky-200 shadow-sm md:col-span-2">
+                    <h4 class="font-bold text-sky-800 flex items-center gap-2">🛍️ JR 博多城 (完全不淋雨)</h4>
+                    <p class="text-xs text-slate-600">博多車站本身就是一個巨大的避難所。B1有地下街，1-8樓有阪急百貨與AMU PLAZA，9-10樓有超強美食街 (城市餐廳空天)。您可以一整天都不出大樓，吃飽買滿。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Sake (清酒) -->
+        <div id="sake" class="tab-content p-8 space-y-8 bg-purple-50/30">
+            <div class="bg-gradient-to-r from-purple-800 to-indigo-700 text-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-extrabold mb-2 flex items-center gap-2">🍶 九州銘酒專區：清酒與燒酎指南</h2>
+                <p class="text-purple-100 text-sm">來到九州怎麼能不喝酒！福岡不僅有著名的燒酎，近年來福岡的「日本酒(清酒)」更是橫掃全日本。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-purple-200 mb-6">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">🛒 去哪裡買/喝？絕對要去「住吉酒販」</h3>
+                <p class="text-sm text-slate-600 mb-3">
+                    <strong>住吉酒販 (博多駅店)</strong> 位於博多車站內（博多站 DEITOS 1F）。這裡不僅可以買到全九州最棒的酒，最特別的是它附設了<strong>「角打 (Kakuchi) 立吞酒吧」</strong>。您可以用超便宜的價格，點幾杯昂貴的清酒試飲，再決定要買哪一瓶回飯店！
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500 relative">
+                    <div class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">動漫朝聖必買</div>
+                    <h4 class="font-bold text-slate-800 mb-1 text-lg">🏀 三井之壽 (三井の寿)</h4>
+                    <p class="text-xs font-mono text-slate-400 mb-3">Mii no Kotobuki (純米吟釀 +14 大辛口)</p>
+                    <div class="text-sm text-slate-700 space-y-2">
+                        <p><strong>深度故事：</strong> 《灌籃高手》作者井上雄彥非常喜歡這款酒，因此將酒名倒過來，創造了人氣角色「三井壽」！</p>
+                        <p><strong>風味：</strong> 大辛口（不甜），口感非常俐落清爽，配生魚片或牛腸鍋極搭。</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">福岡在地王者</div>
+                    <h4 class="font-bold text-slate-800 mb-1 text-lg">🌾 田中六五 (Tanakarokujugo)</h4>
+                    <p class="text-xs font-mono text-slate-400 mb-3">白糸酒造 (純米酒)</p>
+                    <div class="text-sm text-slate-700 space-y-2">
+                        <p><strong>深度故事：</strong> 近年來在日本清酒界爆紅的福岡銘酒，許多東京高級餐廳指定用酒。</p>
+                        <p><strong>風味：</strong> 被譽為「究極的食中酒」。溫潤且帶有微微的米香甘甜，不會搶走食物的風采。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 5: Food (美食) -->
+        <div id="food" class="tab-content p-8 space-y-8 bg-rose-50/30">
+            <div class="bg-gradient-to-r from-rose-700 to-red-600 text-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-extrabold mb-2 flex items-center gap-2">🍽️ 福岡必吃圖鑑與預約戰略</h2>
+                <p class="text-rose-100 text-sm">不踩雷、不乾等。這裡告訴您「吃什麼、去哪吃、何時要預約」。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 relative">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">免預約/排隊</div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-1 flex items-center gap-2">🥖 明太子法棍</h3>
+                    <ul class="text-sm space-y-2 text-slate-700 mt-2">
+                        <li><strong>🎯 分店：</strong> Full Full (フルフル) 天神店 或地下街分店。</li>
+                        <li><strong>💡 攻略：</strong> Day 3 下午茶。外酥內軟，鹹香涮嘴。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 relative border-l-4 border-l-amber-500">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">強烈建議預約</div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-1 flex items-center gap-2">🍲 水炊鍋</h3>
+                    <ul class="text-sm space-y-2 text-slate-700 mt-2">
+                        <li><strong>🎯 名店：</strong> 博多華味鳥 (分店多)、新三浦。</li>
+                        <li><strong>⏳ 預約：</strong> Day 3 晚餐。請提前 2-4 週透過 TableCheck 預約。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 relative border-l-4 border-l-red-500">
+                    <div class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">不預約吃不到</div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-1 flex items-center gap-2">🦑 呼子活花枝</h3>
+                    <ul class="text-sm space-y-2 text-slate-700 mt-2">
+                        <li><strong>🎯 名店：</strong> 河太郎 (中洲店或博多站店)。</li>
+                        <li><strong>💡 攻略：</strong> Day 4 晚餐。現切上桌時花枝還是透明的！務必提早預訂。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">🍛 景點限定美食</h3>
+                    <div class="text-sm text-slate-700 space-y-2">
+                        <p><strong>🥮 梅枝餅：</strong> Day 2 太宰府天滿宮參道，找「かさの家」買現烤的。</p>
+                        <p><strong>🥩 赤牛丼：</strong> Day 5 阿蘇火山一日遊時，若有機會務必品嚐熊本特有的瘦肉和牛。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 6: Budget (預算) -->
+        <div id="budget" class="tab-content p-8 space-y-8 bg-amber-50/30">
+            <div class="bg-amber-600 text-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-extrabold mb-2 flex items-center gap-2">💰 單人預估花費深度解析</h2>
+                <p class="text-amber-100 text-sm">不含個人名牌/藥妝爆買。以日幣匯率約 0.22 估算基礎旅費。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">固定開銷 (機+酒+交通)</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between text-slate-700 mb-1"><span>✈️ 華航來回機票</span><span class="font-mono">NT$ 13,000</span></div>
+                        <div class="flex justify-between text-slate-700 mb-1"><span>🏨 和博多飯店 5 晚 (雙人均攤)</span><span class="font-mono">NT$ 7,500</span></div>
+                        <div class="flex justify-between text-slate-700 mb-1"><span>🚌 由布院一日遊 (Klook)</span><span class="font-mono">NT$ 1,600</span></div>
+                        <div class="flex justify-between text-slate-700 mb-1"><span>🌋 阿蘇火山一日遊 (Klook)</span><span class="font-mono">NT$ 1,900</span></div>
+                        <div class="flex justify-between text-slate-700 mb-1"><span>🚇 當地地鐵與公車 (刷IC卡)</span><span class="font-mono">NT$ 2,000</span></div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl border-2 border-amber-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">餐食估算 (豐儉由人)</h3>
+                        <div class="space-y-3 text-sm text-slate-700">
+                            <div class="flex justify-between"><span>日常拉麵/定食/法棍 (約¥3000/天)</span><span class="font-mono">NT$ 4,000</span></div>
+                            <div class="flex justify-between"><span>高級大餐 3 次 (水炊鍋/和牛/活花枝)</span><span class="font-mono">NT$ 6,000</span></div>
+                            <div class="flex justify-between"><span>清酒/屋台/超商宵夜</span><span class="font-mono">NT$ 2,000</span></div>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-4 border-t-2 border-dashed border-amber-200 text-right">
+                        <div class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">每人預估總花費</div>
+                        <div class="text-4xl font-extrabold text-amber-600">~ NT$ 38,000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 7: Hotel (飯店) -->
+        <div id="hotel" class="tab-content p-8 space-y-8 bg-indigo-50/30">
+            <div class="bg-indigo-700 text-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-extrabold mb-2 flex items-center gap-2">🏨 住宿基地：和博多飯店 (HOTEL WA HAKATA)</h2>
+                <p class="text-indigo-100 text-sm">6天5夜不搬家的終極基地。</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md border-t-4 border-indigo-500 overflow-hidden relative p-6">
+                <ul class="text-sm space-y-4 text-slate-700">
+                    <li class="flex gap-3">
+                        <span class="text-indigo-500 text-xl">🛒</span>
+                        <div><strong>完美搭配清酒與宵夜：</strong> 您在「住吉酒販」買的清酒，或是超市買的和牛，都可以拿回飯店用小廚房加熱，用房間的杯子喝酒，這是住一般商旅無法享受的愜意。</div>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-indigo-500 text-xl">👕</span>
+                        <div><strong>雨天/火山後的救贖：</strong> 如果遇到下雨，或是去阿蘇火山沾染了硫磺味，房內的洗衣機能讓您隔天立刻穿上乾淨衣服。</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Tab 切換邏輯 (純原生 JS)
+        function switchTab(tabId, clickedBtn) {
+            // 1. 隱藏所有內容區塊
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // 2. 顯示目標內容區塊
+            document.getElementById(tabId).style.display = 'block';
+
+            // 3. 重置所有按鈕的樣式為「預設狀態」
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                // 基礎不變的 class 加上自定義的 default class
+                btn.className = "tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg " + btn.getAttribute('data-default');
+            });
+
+            // 4. 將點擊的按鈕設為「啟動狀態」
+            clickedBtn.className = "tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg " + clickedBtn.getAttribute('data-active');
+        }
+
+        // 複製網址功能
+        function handleCopy() {
+            const btn = document.getElementById('copy-btn');
+            const url = window.location.href; // 取得當前網址
+            
+            navigator.clipboard.writeText(url).then(() => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = "✅ 已複製";
+                btn.classList.add('bg-green-100', 'text-green-700');
+                
+                setTimeout(() => {
+                    btn.innerHTML = "📋 複製網址";
+                    btn.classList.remove('bg-green-100', 'text-green-700');
+                }, 2000);
+            }).catch(err => {
+                alert("複製失敗，請手動複製網址分享！");
+            });
+        }
+    </script>
+</body>
+</html>
+
+
