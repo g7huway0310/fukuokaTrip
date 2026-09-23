@@ -28,7 +28,7 @@
                 <div class="flex flex-wrap gap-2 mt-2">
                     <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded font-bold border border-blue-200">2026.09.24 - 09.29</span>
                     <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-xs rounded font-bold border border-emerald-200">雙日專屬包車</span>
-                    <span class="px-2 py-0.5 bg-pink-100 text-pink-800 text-xs rounded font-bold border border-pink-200">深度私廚解析</span>
+                    <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs rounded font-bold border border-amber-200">費用明細與行前須知</span>
                 </div>
             </div>
             <div class="flex gap-3">
@@ -46,11 +46,11 @@
             <button onclick="switchTab('itinerary')" id="btn-itinerary" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-blue-700 border-blue-600 bg-blue-50 cursor-pointer">🗓️ 每日黃金行程</button>
             <button onclick="switchTab('intro')" id="btn-intro" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-emerald-600 border-transparent cursor-pointer">🗾 認識福岡</button>
             <button onclick="switchTab('food')" id="btn-food" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-rose-600 border-transparent cursor-pointer">🍽️ 深度美食解析</button>
-            <button onclick="switchTab('fruits')" id="btn-fruits" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-pink-600 border-transparent cursor-pointer">🍈 頂級水果鑑賞</button>
-            <button onclick="switchTab('shopping')" id="btn-shopping" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-teal-600 border-transparent cursor-pointer">🛒 超市魔法調料</button>
+            <button onclick="switchTab('fruits')" id="btn-fruits" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-pink-600 border-transparent cursor-pointer">🍈 頂級水果與調料</button>
             <button onclick="switchTab('rain')" id="btn-rain" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-sky-600 border-transparent cursor-pointer">☔ 終極雨天備案</button>
             <button onclick="switchTab('sake')" id="btn-sake" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-purple-600 border-transparent cursor-pointer">🍶 九州銘酒專區</button>
-            <button onclick="switchTab('hotel')" id="btn-hotel" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-indigo-600 border-transparent cursor-pointer">🏨 住宿與預算</button>
+            <button onclick="switchTab('budget')" id="btn-budget" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-amber-600 border-transparent cursor-pointer">💰 費用透明化表</button>
+            <button onclick="switchTab('prep')" id="btn-prep" class="tab-btn px-4 py-3 font-bold text-sm transition-all whitespace-nowrap border-b-2 rounded-t-lg text-slate-500 hover:text-teal-600 border-transparent cursor-pointer">🎒 行前準備與須知</button>
         </div>
     </div>
 
@@ -120,16 +120,15 @@
                                         <ul class="list-disc list-inside space-y-1.5 mt-2">
                                             <li><strong>訂單號：</strong>GNF420625</li>
                                             <li><strong>憑證號：</strong><span class="font-mono bg-white px-1 border rounded font-bold">KLK8273779670</span></li>
-                                            <li><strong>接送地：</strong>HOTEL WA HAKATA (和博多飯店)</li>
-                                            <li><strong>人數：</strong>8 人</li>
-                                            <li><strong>路線C：</strong>上色見熊野座神社 ➔ 草千里 ➔ 米塚 ➔ 阿蘇火山觀景點</li>
+                                            <li><strong>人數與路線：</strong>8 人 / 路線 C</li>
+                                            <li><strong>行程：</strong>上色見熊野座神社 ➔ 草千里 ➔ 米塚 ➔ 阿蘇火山觀景點</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="flex gap-3 items-start relative"><div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">10:30</div><div class="flex-1 pb-4"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">上色見熊野座神社</h4><p class="text-xs text-slate-600 mt-1.5 leading-relaxed">走進宛如宮崎駿動畫般的奇幻綠色森林步道，階梯較多，長輩可慢慢走。</p></div></div>
                             <div class="flex gap-3 items-start relative"><div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">13:00</div><div class="flex-1 pb-4"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">草千里之濱 & 阿蘇中岳火山口</h4><p class="text-xs text-slate-600 mt-1.5 leading-relaxed">看著廣闊草原上的馬群，接著近距離觀看冒著白煙的火山口（司機會依當日火山氣體濃度確認是否開放）。</p></div></div>
-                            <div class="flex gap-3 items-start relative"><div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">18:30</div><div class="flex-1 pb-4"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">回程</h4><p class="text-xs text-slate-600 mt-1.5 leading-relaxed">包車返抵福岡市區。</p></div></div>
+                            <div class="flex gap-3 items-start relative"><div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">18:30</div><div class="flex-1 pb-4"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">回程抵達福岡</h4></div></div>
                             <div class="border-2 p-3 rounded-xl my-2 ml-14 bg-orange-50 border-orange-200 text-orange-900 shadow-sm">
                                 <div class="flex items-center gap-2 font-bold text-sm mb-1 text-orange-800"><span>🍜</span> 晚餐：博多拉麵</div>
                                 <div class="text-xs opacity-90 leading-relaxed">歷經一天的戶外壯遊，推薦吃熱騰騰的「ShinShin」豚骨拉麵迅速補充體力。</div>
@@ -156,16 +155,15 @@
                                     <h4 class="font-bold text-pink-800 flex items-center gap-2 mb-2">🛍️ 天神商圈 & 秘境</h4>
                                     <div class="text-xs space-y-2 text-slate-700">
                                         <p>• <strong>東長寺：</strong> 早上先去體驗日本最大木雕大佛與刺激的「全黑地獄巡禮」。</p>
-                                        <p>• <strong>天神爆買：</strong> 天神地下街能無縫直通 Parco、大丸、三越等地，不僅好逛更是最強的<strong>避雨神區</strong>，完全不會淋到雨。</p>
+                                        <p>• <strong>天神爆買：</strong> 天神地下街能無縫直通 Parco、大丸等，是強大的<strong>避雨神區</strong>。</p>
                                         <p>• <strong>下午茶：</strong> 買熱騰騰的 Full Full 明太子法棍。</p>
                                     </div>
                                 </div>
                                 <div class="border-2 border-indigo-300 bg-white p-4 rounded-xl relative overflow-hidden shadow-sm">
-                                    <div class="absolute top-0 right-0 bg-indigo-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl">路線 B：近郊/室內遊</div>
-                                    <h4 class="font-bold text-indigo-800 flex items-center gap-2 mb-2">🚂 門司港 或 科技城</h4>
+                                    <div class="absolute top-0 right-0 bg-indigo-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl">路線 B：近郊看海</div>
+                                    <h4 class="font-bold text-indigo-800 flex items-center gap-2 mb-2">🚂 門司港懷舊漫遊</h4>
                                     <div class="text-xs space-y-2 text-slate-700">
-                                        <p>• <strong>晴天/微雨：</strong> 搭 JR 特急直達門司港，看大正浪漫車站、逛鐵道紀念館，中午吃熱騰騰的「燒咖哩」。</p>
-                                        <p>• <strong>大風大雨備案：</strong> 改去純室內的 <strong>Boss E・ZO FUKUOKA</strong> (軟銀主場旁)，內有超美的 teamLab Forest 互動展，非常適合全家大小躲雨！</p>
+                                        <p>• 搭 JR 特急直達門司港，看大正浪漫車站、逛鐵道紀念館，中午吃熱騰騰的「燒咖哩」。不想逛街的長輩最適合！</p>
                                     </div>
                                 </div>
                             </div>
@@ -197,14 +195,13 @@
                                     <h4 class="font-bold text-orange-800 flex items-center gap-2 mb-2">🌸 晴天 A：能古島 或 糸島</h4>
                                     <div class="text-xs space-y-2 text-slate-700">
                                         <p>• <strong>能古島：</strong> 9月底季節限定，粉紅波斯菊花海搭配絕美博多灣海景。需至姪濱港搭船。</p>
-                                        <p>• <strong>糸島：</strong> 看海中白色鳥居與夫婦岩，喝海景咖啡。風浪大時不建議前往。</p>
                                     </div>
                                 </div>
                                 <div class="border-2 border-cyan-300 bg-white p-4 rounded-xl relative overflow-hidden shadow-sm">
                                     <div class="absolute top-0 right-0 bg-cyan-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl">雨天最強解</div>
                                     <h4 class="font-bold text-cyan-800 flex items-center gap-2 mb-2">🐬 雨備 C：海洋世界海之中道</h4>
                                     <div class="text-xs space-y-2 text-slate-700">
-                                        <p>• <strong>極致避雨：</strong> 九州最大的超唯美水族館。無論外面風雨多大，裡面都能舒適地看海豚表演、巨大的全景水槽與水母牆，療癒度滿分！</p>
+                                        <p>• <strong>極致避雨：</strong> 九州最大的超唯美水族館。無論風雨多大，裡面都能舒適地看海豚表演與巨大的全景水槽，療癒度滿分！</p>
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +234,7 @@
                             <div class="flex gap-3 items-start relative"><div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">10:30</div><div class="flex-1 pb-4"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">九重夢大吊橋</h4><p class="text-xs text-slate-600 mt-1.5 leading-relaxed">日本第一高步行吊橋，因為有包車才能輕鬆解鎖這個搭大眾運輸不便的隱藏景點。</p></div></div>
                             <div class="flex gap-3 items-start relative"><div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">12:00</div><div class="flex-1 pb-4"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">由布院・湯之坪街道 (午餐+自由活動)</h4><p class="text-xs text-slate-600 mt-1.5 leading-relaxed">吃 B-speak 蛋糕捲、漫步至金鱗湖。買好的名產伴手禮隨時丟回車上，不用提著大包小包淋雨！</p></div></div>
                             <div class="flex gap-3 items-start relative"><div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">15:30</div><div class="flex-1 pb-4"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">別府 灶地獄 (或海地獄)</h4><p class="text-xs text-slate-600 mt-1.5 leading-relaxed">看奇特顏色的溫泉造景、泡泡足湯去寒氣。</p></div></div>
-                            <div class="flex gap-3 items-start relative"><div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">18:30</div><div class="flex-1 pb-4"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">回程</h4><p class="text-xs text-slate-600 mt-1.5 leading-relaxed">包車返抵福岡市區。</p></div></div>
+                            <div class="flex gap-3 items-start relative"><div class="w-12 text-xs font-bold text-slate-500 pt-1 shrink-0 text-right font-mono">18:30</div><div class="flex-1 pb-4"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">回程抵達福岡市區</h4></div></div>
                             <div class="border-2 p-3 rounded-xl my-2 ml-14 bg-red-50 border-red-200 text-red-900 shadow-sm">
                                 <div class="flex items-center gap-2 font-bold text-sm mb-1 text-red-800"><span>🥩</span> 慶功宴：頂級和牛燒肉</div>
                                 <div class="text-xs opacity-90 leading-relaxed">最後一晚的晚餐，強烈推薦去吃高級燒肉 (如：敘敘苑) 犒賞全家這幾天的辛勞！</div>
@@ -270,9 +267,8 @@
                                         <p class="font-bold mb-1 text-red-800 text-sm">🚗 機場接送資訊 (送機)</p>
                                         <ul class="list-disc list-inside space-y-1.5 mt-2">
                                             <li><strong>訂單編號：</strong>WJB103062</li>
-                                            <li><strong>車型：</strong>Toyota Hiace (最多9人/9件行李，中文司機)</li>
+                                            <li><strong>車型：</strong>Toyota Hiace (最多9人/9件行李)</li>
                                             <li><strong>上車地點：</strong>博多郵便局 (博多北郵便局博多駅前分室)<br><span class="pl-5 text-gray-500 block mt-0.5">福岡市 Hakata, Hakataekichuogai, 8-1</span></li>
-                                            <li><strong>目的地：</strong>福岡機場 (FUK)</li>
                                             <li><strong>備註：</strong>司機將自指定接送時間起等候 <strong class="text-red-600">30 分鐘</strong>。</li>
                                         </ul>
                                     </div>
@@ -285,56 +281,47 @@
             </div>
         </div>
 
-        <!-- Tab: Intro (NEW) -->
+        <!-- Tab: Intro -->
         <div id="tab-intro" class="tab-content hidden p-8 space-y-8 bg-emerald-50/30">
             <div class="bg-gradient-to-r from-emerald-700 to-teal-600 text-white p-8 rounded-xl shadow-lg relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 text-7xl opacity-20">🗾</div>
                 <h2 class="text-2xl md:text-3xl font-extrabold mb-3 relative z-10">認識福岡：亞洲的門戶，微型都會的極致</h2>
                 <p class="text-emerald-100 text-sm md:text-base max-w-2xl relative z-10">出發前，先花 1 分鐘了解我們即將前往的城市。為什麼福岡這麼受歡迎？</p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Point 1 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500 hover:shadow-md transition">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500">
                     <div class="text-3xl mb-3">✈️</div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">全球最強的「機場通勤」</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">福岡機場就位於市區旁邊！從國際線航廈搭乘地鐵到市中心（博多/天神）<strong>只需要短短 10 分鐘</strong>。這意味著：別人剛抵達東京還在搭一小時的 NEX 遙遙無期時，我們已經坐在市區吃熱騰騰的拉麵了！</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">福岡機場就位於市區旁邊！從國際線航廈搭乘地鐵到市中心（博多）<strong>只需要短短 10 分鐘</strong>。別人剛抵達東京還在搭車遙遙無期時，我們已經坐在市區吃熱騰騰的拉麵了！</p>
                 </div>
-                
-                <!-- Point 2 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-rose-500 hover:shadow-md transition">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-rose-500">
                     <div class="text-3xl mb-3">🍜</div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-2">商人之都與海陸食材寶庫</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">福岡歷史上由武士居住的「福岡」與商人聚集的「博多」組成。身為九州最大的城市，這裡匯集了玄界灘的新鮮海鮮（如透明花枝、明太子）與九州山林的豐饒物產（雞肉、豬肉、黑毛和牛）。</p>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">商人之都與食材寶庫</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">身為九州最大的城市，這裡匯集了玄界灘的新鮮海鮮（如透明花枝、明太子）與九州山林的豐饒物產（黑毛和牛）。這裡的人愛吃、懂吃，物價又比東京親民許多。</p>
                 </div>
-
-                <!-- Point 3 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-amber-500 hover:shadow-md transition">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-amber-500">
                     <div class="text-3xl mb-3">🏮</div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">濃郁的「屋台」與人情味</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">福岡是日本唯一保留大規模合法「屋台（路邊攤）」文化的城市。雖然我們這次人數較多不一定擠得進去，但夜晚走在中洲川端，看著一排排亮起紅燈籠的屋台，就能感受到這座城市有別於東京冷漠的熱情氛圍。</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">福岡是日本少數保留合法「屋台（路邊攤）」文化的城市。走在街頭，看著一排排亮起紅燈籠的屋台，就能感受到這座城市有別於大都會冷漠的熱情氛圍。</p>
                 </div>
-
-                <!-- Point 4 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500 hover:shadow-md transition">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500">
                     <div class="text-3xl mb-3">🚶‍♂️</div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">Compact City (緊湊型城市)</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">不需要像在東京或大阪那樣在地鐵迷宮中日走兩萬步。福岡的精華區集中，商場之間（如天神地下街連通各大百貨）的距離非常完美，買完東西隨時可以回飯店放，是一座對體力非常友善的城市。</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">不需要在地鐵迷宮中日走兩萬步。福岡的精華區集中，買完東西隨時可以回飯店放，是一座對長輩與體力非常友善的城市。</p>
                 </div>
             </div>
         </div>
 
-        <!-- Tab: Food Deep Dive (UPDATED) -->
+        <!-- Tab: Food Deep Dive -->
         <div id="tab-food" class="tab-content hidden p-8 space-y-8 bg-rose-50/30">
             <div class="bg-gradient-to-r from-rose-800 to-red-700 text-white p-8 rounded-xl shadow-lg relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 text-7xl opacity-20">🍽️</div>
                 <h2 class="text-2xl md:text-3xl font-extrabold mb-3 relative z-10">福岡必吃圖鑑：舌尖上的深度解析</h2>
-                <p class="text-rose-100 text-sm md:text-base max-w-2xl relative z-10">為什麼這些食物會成為福岡的靈魂？了解背後的巧思，吃進嘴裡的那一刻會更感動。</p>
+                <p class="text-rose-100 text-sm md:text-base max-w-2xl relative z-10">了解食物背後的巧思，吃進嘴裡的那一刻會更感動。</p>
             </div>
-
             <div class="space-y-6">
                 <!-- Food 1 -->
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
                     <div class="md:w-1/3">
                         <div class="text-4xl mb-2">🍲</div>
                         <h3 class="text-xl font-bold text-slate-800">博多牛腸鍋 <span class="text-sm font-normal text-slate-500 block mt-1">Motsunabe (もつ鍋)</span></h3>
@@ -342,13 +329,11 @@
                     </div>
                     <div class="md:w-2/3 space-y-3">
                         <p class="text-sm text-slate-700 font-bold border-b pb-2">🤔 為什麼必吃？不就是內臟嗎？</p>
-                        <p class="text-sm text-slate-600 leading-relaxed">打破你對台灣滷大腸的印象！福岡牛腸鍋使用的是最高級和牛的小腸。廚師會小心保留腸壁內那層<strong>「雪白的脂肪」</strong>，當它在味噌或醬油高湯中熬煮時，脂肪會融化成極致的甜味。<br><br>為了平衡這份濃郁，鍋上會堆滿一座小山般的<strong>高麗菜與韭菜</strong>。蔬菜的清甜與牛油的狂野完美融合，最後再下「強棒麵」吸滿精華，是讓味蕾瞬間甦醒的極品！</p>
-                        <p class="text-xs text-rose-700 bg-rose-50 p-2 rounded">名店推薦：おおやま (Oyama - 味噌派)、笑樂 (醬油派)</p>
+                        <p class="text-sm text-slate-600 leading-relaxed">打破你對台灣滷大腸的印象！福岡牛腸鍋使用的是最高級和牛的小腸。廚師會小心保留腸壁內那層<strong>「雪白的脂肪」</strong>，當它在味噌高湯中熬煮時，會融化成極致的甜味。配合堆成小山的<strong>高麗菜與韭菜</strong>，蔬菜清甜與牛油完美融合。</p>
                     </div>
                 </div>
-
                 <!-- Food 2 -->
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
                     <div class="md:w-1/3">
                         <div class="text-4xl mb-2">🐔</div>
                         <h3 class="text-xl font-bold text-slate-800">博多水炊鍋 <span class="text-sm font-normal text-slate-500 block mt-1">Mizutaki (水炊き)</span></h3>
@@ -356,17 +341,11 @@
                     </div>
                     <div class="md:w-2/3 space-y-3">
                         <p class="text-sm text-slate-700 font-bold border-b pb-2">🤔 充滿儀式感的究極雞白湯</p>
-                        <p class="text-sm text-slate-600 leading-relaxed">如果牛腸鍋是狂野，水炊鍋就是「優雅」。這是將連骨雞肉熬煮數十小時至湯頭呈現乳白色的料理。吃水炊鍋有嚴格的<strong>「儀式感」</strong>：<br><br>
-                        1️⃣ <strong>先喝湯：</strong> 什麼料都不加，加一點點海鹽，品嚐滿滿膠原蛋白的純湯。<br>
-                        2️⃣ <strong>吃雞肉：</strong> 沾著微酸的「橙醋 (Ponzu)」吃，非常解膩。<br>
-                        3️⃣ <strong>下肉丸與蔬菜：</strong> 讓蔬菜吸收湯汁。<br>
-                        4️⃣ <strong>雜炊：</strong> 最後的湯底打顆蛋煮成粥，將整鍋精華一滴不剩吃光。</p>
-                        <p class="text-xs text-teal-700 bg-teal-50 p-2 rounded">名店推薦：博多華味鳥、新三浦</p>
+                        <p class="text-sm text-slate-600 leading-relaxed">如果牛腸鍋是狂野，水炊鍋就是「優雅」。吃水炊鍋有嚴格的<strong>「儀式感」</strong>：1️⃣ <strong>先喝湯：</strong> 什麼料都不加，品嚐純湯。2️⃣ <strong>吃雞肉：</strong> 沾微酸的「橙醋」解膩。3️⃣ <strong>下蔬菜。</strong> 4️⃣ <strong>雜炊：</strong> 最後打顆蛋煮成粥，將精華一滴不剩吃光。</p>
                     </div>
                 </div>
-
                 <!-- Food 3 -->
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
                     <div class="md:w-1/3">
                         <div class="text-4xl mb-2">🦑</div>
                         <h3 class="text-xl font-bold text-slate-800">呼子活花枝 <span class="text-sm font-normal text-slate-500 block mt-1">Yobuko Ika</span></h3>
@@ -374,103 +353,26 @@
                     </div>
                     <div class="md:w-2/3 space-y-3">
                         <p class="text-sm text-slate-700 font-bold border-b pb-2">🤔 評斷新鮮的標準是「透明度」</p>
-                        <p class="text-sm text-slate-600 leading-relaxed">源自九州佐賀呼子港的名菜。這不是你平常吃到那種白白、嚼不爛的花枝。現切的活花枝端上桌時，肉質是<strong>完全透明</strong>的，甚至還會改變顏色！<br><br>
-                        吃起來口感「清脆」且帶有強烈的天然甘甜。最精彩的是<strong>第二吃</strong>：當你吃完生魚片部位，店員會把剩下的觸鬚收走，為你炸成金黃酥脆的「天婦羅」，外酥內軟，堪稱一絕。</p>
-                        <p class="text-xs text-blue-700 bg-blue-50 p-2 rounded">名店推薦：河太郎 (中洲本店或博多站店)</p>
-                    </div>
-                </div>
-
-                <!-- Food 4 -->
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/3">
-                        <div class="text-4xl mb-2">🍜</div>
-                        <h3 class="text-xl font-bold text-slate-800">博多豚骨拉麵 <span class="text-sm font-normal text-slate-500 block mt-1">Tonkotsu Ramen</span></h3>
-                        <div class="mt-4 inline-block bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded font-bold">隨時可吃</div>
-                    </div>
-                    <div class="md:w-2/3 space-y-3">
-                        <p class="text-sm text-slate-700 font-bold border-b pb-2">🤔 為什麼麵條要這麼細？還要「替玉」？</p>
-                        <p class="text-sm text-slate-600 leading-relaxed">早期在魚市場工作的工人們需要快速吃完熱騰騰的一餐，為了縮短煮麵時間，博多拉麵發展出了<strong>「極細麵」</strong>。<br><br>但也因為麵細，泡在湯裡久了容易爛，所以演變出不一次給大份量麵條，而是吃完後再加點一團麵的<strong>「替玉 (Kaedama)」</strong>文化！建議點麵時選擇「硬 (Bari-kata)」，最能吃出小麥香。除了有名的一蘭，當地人更愛吃口味較清爽、麵條極細的 ShinShin。</p>
-                        <p class="text-xs text-amber-700 bg-amber-50 p-2 rounded">名店推薦：博多らーめん ShinShin</p>
-                    </div>
-                </div>
-                
-                <!-- Food 5 -->
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/3">
-                        <div class="text-4xl mb-2">🥖</div>
-                        <h3 class="text-xl font-bold text-slate-800">明太子法棍 <span class="text-sm font-normal text-slate-500 block mt-1">Mentai French</span></h3>
-                        <div class="mt-4 inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded font-bold">建議：逛街下午茶</div>
-                    </div>
-                    <div class="md:w-2/3 space-y-3">
-                        <p class="text-sm text-slate-700 font-bold border-b pb-2">🤔 和洋折衷的完美產物</p>
-                        <p class="text-sm text-slate-600 leading-relaxed">明太子是福岡的靈魂食材。將微辣鹹香的明太子拌入大量奶油，厚厚塗抹在剛出爐、外皮酥脆內裡充滿氣孔的法國長棍麵包上。咬下去時，奶油融化在熱騰騰的麵包裡，與明太子的鮮味爆發，是會讓人忍不住一口接一口的惡魔級點心。</p>
-                        <p class="text-xs text-pink-700 bg-pink-50 p-2 rounded">名店推薦：Full Full (天神店)</p>
+                        <p class="text-sm text-slate-600 leading-relaxed">現切的活花枝端上桌時，肉質是<strong>完全透明</strong>的！吃起來口感清脆且甘甜。最精彩的是<strong>第二吃</strong>：吃完生魚片部位，店員會把剩下的觸鬚收走，為你炸成金黃酥脆的「天婦羅」，外酥內軟，雙重享受。</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tab: Fruits -->
+        <!-- Tab: Fruits & Shopping (Combined to save space) -->
         <div id="tab-fruits" class="tab-content hidden p-8 space-y-8 bg-pink-50/30">
             <div class="bg-gradient-to-r from-pink-600 to-rose-500 text-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-extrabold mb-2 flex items-center gap-2">🍈 頂級水果鑑賞與奢華吃法</h2>
-                <p class="text-pink-100 text-sm">在日本，水果是「甜點與奢侈品」。既然住在有廚房的和博多飯店，我們就要用私廚等級的吃法，把超市水果吃出米其林的高級感！</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-pink-400">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">🍑 水蜜桃 (Momo)</h3>
-                    <p class="text-xs text-slate-500 mb-4 border-b pb-2">9月底產季末期，看到絕對別放過。</p>
-                    <ul class="text-sm space-y-3 text-slate-700">
-                        <li><strong>怎麼挑：</strong> <strong class="text-pink-600">越大越甜！</strong> 看表面有沒有白色的 <strong>"Sugar Spot" (糖斑)</strong>。</li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-emerald-400">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">🍇 晴王 / 麝香葡萄</h3>
-                    <p class="text-xs text-slate-500 mb-4 border-b pb-2">9月極盛產季！</p>
-                    <ul class="text-sm space-y-3 text-slate-700">
-                        <li><strong>特色：</strong> 連皮吃、無籽、清脆帶花香/荔枝香。買回飯店吃比台灣便宜極多。</li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-amber-800">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">🍈 新鮮無花果</h3>
-                    <p class="text-xs text-slate-500 mb-4 border-b pb-2">夏秋限定奢華滋味。</p>
-                    <ul class="text-sm space-y-3 text-slate-700">
-                        <li><strong>怎麼挑：</strong> 看<strong>「屁股的裂口」</strong>！底部稍微裂開、色澤變深代表最甜。</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-2 border-rose-200 shadow-md">
-                <h3 class="text-xl font-bold text-rose-800 mb-3">✨ 私廚傳授：三種奢華吃法</h3>
-                <div class="space-y-4">
-                    <div class="bg-slate-50 p-3 rounded"><strong>1. 大人味淋醬：</strong> 淋上一點深色萊姆酒 (Dark Rum)，層次瞬間拉高。</div>
-                    <div class="bg-slate-50 p-3 rounded"><strong>2. 冰火交融：</strong> 配上一球市售香草冰淇淋。</div>
-                    <div class="bg-slate-50 p-3 rounded"><strong>3. 義式開胃菜：</strong> 新鮮 Mozzarella 起司 + 水果 + 橄欖油 + 前一個 Tab 買的<strong>「出汁鹽」</strong>！</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tab: Shopping -->
-        <div id="tab-shopping" class="tab-content hidden p-8 space-y-8 bg-teal-50/30">
-            <div class="bg-gradient-to-r from-teal-700 to-emerald-600 text-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-extrabold mb-2">🛒 隱藏版主婦超市掃貨清單</h2>
-                <p class="text-teal-100 text-sm">單價低 (約 ¥500~600) 且重量輕，是發給親友的最強伴手禮。</p>
+                <h2 class="text-2xl font-extrabold mb-2">🍈 頂級水果鑑賞與 🛒 魔法調料</h2>
+                <p class="text-pink-100 text-sm">住在有廚房的「和博多」，我們要把超市買回來的東西吃出米其林的高級感！</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-teal-500">
-                    <h3 class="text-xl font-bold text-slate-800 mb-2">🧂 萩之食品 鮮味高湯鹽</h3>
-                    <p class="text-xs text-slate-500 mb-4">はぎの 出汁塩</p>
-                    <p class="text-sm text-slate-700 mb-2">加水是高湯，當鹽用不需味精。</p>
-                    <p class="text-sm font-bold text-teal-800">🏆 首選必買：喉黑魚 (のどぐろ)</p>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-pink-400">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">🍑 水蜜桃 & 🍇 晴王麝香葡萄</h3>
+                    <p class="text-sm text-slate-700 mb-4">9月底是產季。水蜜桃挑表面有白色糖斑的；麝香葡萄連皮吃。<strong>私廚吃法：</strong> 淋上一點深色萊姆酒，或配上一球香草冰淇淋！</p>
                 </div>
-                <div class="space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border">
-                        <h3 class="text-lg font-bold text-slate-800 mb-2">🍇 葡萄山椒</h3>
-                        <p class="text-sm text-slate-700">帶有柑橘清香。麻感刺激味蕾，可用來做<strong>減鹽料理</strong>。</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm border">
-                        <h3 class="text-lg font-bold text-slate-800 mb-2">🍶 白高湯 & 🌿 刨絲昆布</h3>
-                        <p class="text-sm text-slate-700">白高湯滷肉不發黑；刨絲昆布丟泡麵或取代皮蛋豆腐的柴魚片神搭！</p>
-                    </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-teal-500">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">🧂 超市必買：萩之食品 出汁鹽</h3>
+                    <p class="text-sm text-slate-700 mb-4">加水就是高湯，當鹽用不需味精。首推「喉黑魚 (のどぐろ)」口味。單價約 ¥500，是發給親友的最強伴手禮。</p>
                 </div>
             </div>
         </div>
@@ -479,7 +381,7 @@
         <div id="tab-rain" class="tab-content hidden p-8 space-y-8 bg-sky-50/30">
             <div class="bg-gradient-to-r from-sky-600 to-indigo-600 text-white p-6 rounded-xl shadow-lg">
                 <h2 class="text-2xl font-extrabold mb-2">☔ 終極雨天應變機制</h2>
-                <p class="text-sky-100 text-sm">遇到陣雨或大雨不用愁，這三大備案讓雨天一樣精彩。</p>
+                <p class="text-sky-100 text-sm">雨天不用愁，鐵道與室內抗雨備案完美啟動。</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white p-6 rounded-xl border-t-4 border-indigo-400 shadow-sm">
@@ -490,11 +392,9 @@
                     <h3 class="text-lg font-bold text-slate-800 mb-2">🐬 方案二：海之中道海洋世界</h3>
                     <p class="text-sm text-slate-600">抗狂風暴雨最強！全室內超大型水族館，看海豚、水母牆，療癒滿分。</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl border-t-4 border-purple-400 shadow-sm md:col-span-2 flex flex-col md:flex-row gap-4 items-center">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-bold text-slate-800 mb-2">🎢 方案三：Boss E・ZO 科技娛樂城</h3>
-                        <p class="text-sm text-slate-600">位在 PayPay 巨蛋旁。不想跑遠的極佳選擇！裡面有絕美的 teamLab Forest 光影互動展，保證相機拍不停。</p>
-                    </div>
+                <div class="bg-white p-6 rounded-xl border-t-4 border-purple-400 shadow-sm md:col-span-2">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">🎢 方案三：Boss E・ZO 科技娛樂城 (PayPay巨蛋旁)</h3>
+                    <p class="text-sm text-slate-600">不想跑遠的極佳選擇！內有 teamLab Forest 光影互動展，保證相機拍不停。</p>
                 </div>
             </div>
         </div>
@@ -506,46 +406,162 @@
             </div>
             <div class="bg-white p-6 rounded-xl shadow-sm border mb-6">
                 <h3 class="text-lg font-bold text-slate-800 mb-2">🛒 買酒聖地：住吉酒販 (博多站)</h3>
-                <p class="text-sm text-slate-600">附設角打立吞酒吧，可先試飲再買回飯店！</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500">
-                    <h4 class="font-bold text-slate-800 text-lg">🏀 三井之壽 (灌籃高手朝聖)</h4>
-                    <p class="text-sm text-slate-600">大辛口俐落清爽，背號14呼應日本酒度+14。</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
-                    <h4 class="font-bold text-slate-800 text-lg">🌾 田中六五</h4>
-                    <p class="text-sm text-slate-600">福岡在地王者，究極的食中酒。</p>
-                </div>
+                <p class="text-sm text-slate-600">附設角打立吞酒吧，可先試飲再買回飯店！推薦買大辛口的「三井之壽 (灌籃高手朝聖)」或是福岡在地王者「田中六五」。</p>
             </div>
         </div>
 
-        <!-- Tab: Hotel & Budget -->
-        <div id="tab-hotel" class="tab-content hidden p-8 space-y-8 bg-amber-50/30">
+        <!-- Tab: Budget (NEW/UPDATED) -->
+        <div id="tab-budget" class="tab-content hidden p-8 space-y-8 bg-amber-50/30">
             <div class="bg-gradient-to-r from-amber-600 to-orange-500 text-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-extrabold mb-2">🏨 住宿基地與花費預估</h2>
+                <h2 class="text-2xl font-extrabold mb-2">💰 預估花費與已付明細表</h2>
+                <p class="text-amber-100 text-sm">以下金額為「單人 (每人)」平均預估。讓大家心裡有底，方便準備日幣現金或信用卡額度。</p>
+            </div>
+
+            <!-- Table 1: Already Paid -->
+            <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="bg-slate-100 px-6 py-3 border-b border-slate-200">
+                    <h3 class="font-bold text-slate-800">✅ 行前已支付 (固定開銷)</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200 text-sm">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left font-bold text-slate-600">項目</th>
+                                <th class="px-6 py-3 text-left font-bold text-slate-600">單人金額 (NT$)</th>
+                                <th class="px-6 py-3 text-left font-bold text-slate-600">備註說明</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 bg-white">
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">✈️ 華航來回機票</td>
+                                <td class="px-6 py-4 text-slate-700">~ 13,000</td>
+                                <td class="px-6 py-4 text-slate-500 text-xs">CI 128 / CI 117</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">🏨 和博多飯店 (5晚)</td>
+                                <td class="px-6 py-4 text-slate-700">~ 7,500</td>
+                                <td class="px-6 py-4 text-slate-500 text-xs">8人均攤預估</td>
+                            </tr>
+                            <tr class="bg-amber-50/30">
+                                <td class="px-6 py-4 font-medium text-slate-900">🚗 機場接送 (來回)</td>
+                                <td class="px-6 py-4 text-amber-700 font-bold">636</td>
+                                <td class="px-6 py-4 text-slate-500 text-xs">Klook已刷卡: 單趟 $2544 ÷ 8人 × 2趟</td>
+                            </tr>
+                            <tr class="bg-amber-50/30">
+                                <td class="px-6 py-4 font-medium text-slate-900">🚐 阿蘇/由布院 包車</td>
+                                <td class="px-6 py-4 text-amber-700 font-bold">~ 2,500</td>
+                                <td class="px-6 py-4 text-slate-500 text-xs">Klook已刷卡: 預估單日1萬 ÷ 8人 × 2天</td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="bg-slate-50 border-t-2 border-slate-200">
+                            <tr>
+                                <td class="px-6 py-3 font-bold text-slate-800 text-right">小計</td>
+                                <td colspan="2" class="px-6 py-3 font-bold text-lg text-slate-800">~ NT$ 23,636</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Table 2: Estimated Local -->
+            <div class="bg-white rounded-xl shadow-sm border overflow-hidden mt-6">
+                <div class="bg-blue-50 px-6 py-3 border-b border-blue-200">
+                    <h3 class="font-bold text-blue-900">💳 當地預估開銷 (請準備對應日幣/信用卡)</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200 text-sm">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left font-bold text-slate-600">項目</th>
+                                <th class="px-6 py-3 text-left font-bold text-slate-600">單人金額預估 (NT$)</th>
+                                <th class="px-6 py-3 text-left font-bold text-slate-600">包含內容</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 bg-white">
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">🚇 當地交通費</td>
+                                <td class="px-6 py-4 text-slate-700">~ 1,500</td>
+                                <td class="px-6 py-4 text-slate-500 text-xs">地鐵、JR(往門司港)、公車(往Lalaport)。建議刷 Suica/西瓜卡。</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">🍜 日常餐飲</td>
+                                <td class="px-6 py-4 text-slate-700">~ 4,500</td>
+                                <td class="px-6 py-4 text-slate-500 text-xs">每日早餐、拉麵、小吃、下午茶。</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">🥩 高級大餐</td>
+                                <td class="px-6 py-4 text-slate-700">~ 7,000</td>
+                                <td class="px-6 py-4 text-slate-500 text-xs">牛腸鍋(1k)、水炊鍋(1.5k)、活花枝(1.5k)、和牛燒肉(3k)。大餐多可刷卡。</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">🍇 公費採買 (超市)</td>
+                                <td class="px-6 py-4 text-slate-700">~ 1,500</td>
+                                <td class="px-6 py-4 text-slate-500 text-xs">麝香葡萄、水蜜桃、飯店內飲料、清酒。</td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="bg-slate-50 border-t-2 border-slate-200">
+                            <tr>
+                                <td class="px-6 py-3 font-bold text-blue-900 text-right">小計</td>
+                                <td colspan="2" class="px-6 py-3 font-bold text-lg text-blue-900">~ NT$ 14,500</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4 border-t-4 border-double text-right">
+                <div class="text-slate-500 text-sm font-bold">每人預估總花費 (不含個人免稅血拚)</div>
+                <div class="text-4xl font-extrabold text-amber-600 mt-2">~ NT$ 38,000</div>
+            </div>
+        </div>
+
+        <!-- Tab: Preparation (NEW) -->
+        <div id="tab-prep" class="tab-content hidden p-8 space-y-8 bg-teal-50/30">
+            <div class="bg-gradient-to-r from-teal-700 to-emerald-600 text-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-extrabold mb-2">🎒 行前準備與實用須知</h2>
+                <p class="text-teal-100 text-sm">出發前請務必確認這幾點，讓旅程通關與入住更順利！</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-xl shadow-sm border p-6">
-                    <h3 class="font-bold text-indigo-800 mb-4 border-b pb-2 text-lg">🏨 HOTEL WA HAKATA</h3>
-                    <ul class="text-sm space-y-4 text-slate-700">
-                        <li>🛒 <strong>完美廚房：</strong> 買回來的麝香葡萄、起司與清酒，能在房間舒適享用。</li>
-                        <li>👕 <strong>洗烘衣機：</strong> 6天不搬家，衣物隨時洗滌。</li>
-                        <li>📍 <strong>絕佳位置：</strong> 距離機場與主要商圈極近，省下大量舟車勞頓。</li>
+                <!-- VJW -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">📱 入境必備：Visit Japan Web</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">日本海關已全面數位化，請務必在出發前 3 天，上網填寫 <strong class="text-indigo-600">Visit Japan Web (VJW)</strong>。</p>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                        <li>填寫完成後，會得到一個 <strong>QR Code</strong>。</li>
+                        <li>強烈建議：<strong class="text-red-600">將 QR Code 截圖存入手機相簿！</strong> 避免機場無網路打不開。</li>
                     </ul>
                 </div>
-                
-                <div class="bg-white p-6 rounded-xl shadow-sm border flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-slate-800 mb-4 border-b pb-2 text-lg">💰 單人預估花費</h3>
-                        <p class="text-sm text-slate-700 mb-2"><strong>固定開銷：</strong> 機票 13k / 住宿 7.5k / 雙包車 3.5k / 交通 2k</p>
-                        <p class="text-sm text-slate-700"><strong>餐食採購：</strong> 日常餐 4k / 高級大餐 6k / 水果調料 2k</p>
-                    </div>
-                    <div class="mt-8 pt-4 border-t text-right">
-                        <div class="text-slate-500 text-xs font-bold">每人預估總花費</div>
-                        <div class="text-4xl font-extrabold text-amber-600">~ NT$ 38,000</div>
-                    </div>
+
+                <!-- Luggage -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">🧳 華航行李額度提醒</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">準備去 LaLaport 和天神爆買前，請留意行李重量：</p>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                        <li><strong>託運行李：</strong> 通常為 23 公斤 (請依實際購買艙等為準，部分艙等為 2 件)。</li>
+                        <li><strong>手提行李：</strong> 7 公斤。</li>
+                        <li>包車提醒：我們預訂的 10 人座包車最多容納 <strong>9件大行李</strong>，請大家稍微控制件數喔！</li>
+                    </ul>
+                </div>
+
+                <!-- Tax Free -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-rose-500">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">🛍️ 免稅品 (Tax-Free) 規則</h3>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-2">
+                        <li><strong>免稅門檻：</strong> 單店消費滿 ¥5,000 即可免稅。</li>
+                        <li><strong>消耗品切勿拆封：</strong> 藥妝、零食等「消耗品」結帳後會被密封在免稅袋中。<strong class="text-red-600">離開日本前絕對不能拆開！</strong> 若被海關查驗發現拆封，會被要求補繳 10% 消費稅。</li>
+                        <li><strong>一般物品：</strong> 衣服、鞋子、電器等非消耗品可以馬上拆開使用。</li>
+                    </ul>
+                </div>
+
+                <!-- Hotel Rules -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">🏨 和博多 (公寓式酒店) 須知</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">我們這次入住的是有廚房的公寓式酒店，有別於一般飯店，需特別注意：</p>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-2">
+                        <li><strong>垃圾分類非常嚴格：</strong> 請務必將寶特瓶、鐵鋁罐、一般垃圾分開丟棄。</li>
+                        <li><strong>毛巾更換：</strong> 部分公寓酒店連住期間不會每天進房打掃，毛巾若需更換或使用洗衣機，請留意房內說明。</li>
+                    </ul>
                 </div>
             </div>
         </div>
